@@ -6,17 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C528F9112D4A79FA007C4A51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C528F90B2D4A79FA007C4A51 /* Preview Assets.xcassets */; };
+		C528F9122D4A79FA007C4A51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C528F90D2D4A79FA007C4A51 /* Assets.xcassets */; };
+		C528F9132D4A79FA007C4A51 /* CoctailSwiftDataApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528F90E2D4A79FA007C4A51 /* CoctailSwiftDataApp.swift */; };
+		C528F9142D4A79FA007C4A51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528F90F2D4A79FA007C4A51 /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		C528F8FA2D4A79D4007C4A51 /* CoctailSwiftData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoctailSwiftData.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C528F90B2D4A79FA007C4A51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C528F90D2D4A79FA007C4A51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C528F90E2D4A79FA007C4A51 /* CoctailSwiftDataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoctailSwiftDataApp.swift; sourceTree = "<group>"; };
+		C528F90F2D4A79FA007C4A51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		C528F8FC2D4A79D4007C4A51 /* CoctailSwiftData */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CoctailSwiftData;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C528F8F72D4A79D4007C4A51 /* Frameworks */ = {
@@ -32,7 +35,7 @@
 		C528F8F12D4A79D4007C4A51 = {
 			isa = PBXGroup;
 			children = (
-				C528F8FC2D4A79D4007C4A51 /* CoctailSwiftData */,
+				C528F9102D4A79FA007C4A51 /* CoctailSwiftData */,
 				C528F8FB2D4A79D4007C4A51 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +46,25 @@
 				C528F8FA2D4A79D4007C4A51 /* CoctailSwiftData.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C528F90C2D4A79FA007C4A51 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C528F90B2D4A79FA007C4A51 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C528F9102D4A79FA007C4A51 /* CoctailSwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				C528F90E2D4A79FA007C4A51 /* CoctailSwiftDataApp.swift */,
+				C528F90F2D4A79FA007C4A51 /* ContentView.swift */,
+				C528F90C2D4A79FA007C4A51 /* Preview Content */,
+				C528F90D2D4A79FA007C4A51 /* Assets.xcassets */,
+			);
+			path = CoctailSwiftData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +81,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				C528F8FC2D4A79D4007C4A51 /* CoctailSwiftData */,
 			);
 			name = CoctailSwiftData;
 			packageProductDependencies = (
@@ -109,6 +128,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C528F9112D4A79FA007C4A51 /* Preview Assets.xcassets in Resources */,
+				C528F9122D4A79FA007C4A51 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +140,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C528F9132D4A79FA007C4A51 /* CoctailSwiftDataApp.swift in Sources */,
+				C528F9142D4A79FA007C4A51 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
