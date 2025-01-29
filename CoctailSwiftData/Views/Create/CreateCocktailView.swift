@@ -9,15 +9,18 @@ import SwiftUI
 
 struct CreateCocktailView: View {
     @StateObject private var viewModel = CreateCocktailViewModel()
-    @State private var showingAlert = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
+                SelectedImageView(selectedImageName: viewModel.selectedImageName) {
+                    viewModel.isImageSheetPresented = true
+                }
+                
                 Section {
                     TextField("Cocktail Name", text: $viewModel.name)
-                    TextEditor(text: $viewModel.instructions)
-                        .frame(minHeight: 100)
+                    TextField("Instructions", text: $viewModel.instructions, axis: .vertical)
+                        .lineLimit(3)
                 }
                 
                 Section("Select Ingredients") {
@@ -45,21 +48,26 @@ struct CreateCocktailView: View {
                 Section {
                     Button("Create Cocktail") {
                         viewModel.saveCocktail()
-                        showingAlert = true
+                        viewModel.showingAlert = true
                     }
-                    .disabled(viewModel.name.isEmpty ||
-                              viewModel.instructions.isEmpty ||
-                              viewModel.selectedIngredients.isEmpty)
+                    .disabled(viewModel.isCreateDisabled)
                 }
             }
             .navigationTitle("New Cocktail")
             .onAppear {
                 viewModel.fetchAvailableIngredients()
             }
-            .alert("Success", isPresented: $showingAlert) {
+            .alert("Success", isPresented: $viewModel.showingAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
                 Text("Cocktail created successfully")
+            }
+            .sheet(isPresented: $viewModel.isImageSheetPresented) {
+                ImageSelectionSheet(
+                    imageNames: viewModel.cocktailImageNames,
+                    selectedImageName: $viewModel.selectedImageName,
+                    isPresented: $viewModel.isImageSheetPresented
+                )
             }
         }
     }

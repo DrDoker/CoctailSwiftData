@@ -49,8 +49,18 @@ struct IngredientDetailView: View {
             if !viewModel.ingredient.cocktails.isEmpty {
                 Section("Used in Cocktails") {
                     ForEach(viewModel.ingredient.cocktails) { cocktail in
-                        NavigationLink(destination: CocktailDetailView(cocktail: cocktail)) {
-                            Text(cocktail.name)
+                        NavigationLink(
+                            destination: CocktailDetailView(cocktail: cocktail)
+                        ) {
+                            HStack {
+                                if let imageName = cocktail.imageName {
+                                    Image(imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                                }
+                                Text(cocktail.name)
+                            }
                         }
                     }
                 }

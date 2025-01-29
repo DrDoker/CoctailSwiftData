@@ -164,8 +164,8 @@
 		C528F9392D4A922D007C4A51 /* Create */ = {
 			isa = PBXGroup;
 			children = (
-				C528F93E2D4A9245007C4A51 /* CreateCocktailView.swift */,
 				C528F93C2D4A923D007C4A51 /* CreateIngredientView.swift */,
+				C528F93E2D4A9245007C4A51 /* CreateCocktailView.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";

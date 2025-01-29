@@ -18,7 +18,15 @@ struct CocktailsListView: View {
                     NavigationLink(
                         destination: CocktailDetailView(cocktail: cocktail)
                     ) {
-                        Text(cocktail.name)
+                        HStack {
+                            if let imageName = cocktail.imageName {
+                                Image(imageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 50, height: 50)
+                            }
+                            Text(cocktail.name)
+                        }
                     }
                 }
                 .onDelete { indexSet in
@@ -27,7 +35,8 @@ struct CocktailsListView: View {
                     }
                 }
             }
-            .navigationTitle("Коктейли")
+            .listStyle(PlainListStyle())
+            .navigationTitle("Cocktails")
             .onAppear {
                 viewModel.fetchCocktails()
             }

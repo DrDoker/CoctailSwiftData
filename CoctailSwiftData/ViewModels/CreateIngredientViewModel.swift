@@ -12,7 +12,6 @@ final class CreateIngredientViewModel: ObservableObject {
     @Published var selectedImageName: String?
     @Published var name: String = ""
     @Published var shortDescription: String = ""
-    
     @Published var showingAlert = false
     @Published var isImageSheetPresented = false
     
