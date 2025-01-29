@@ -5,14 +5,13 @@
 //  Created by Serhii on 29.01.2025.
 //
 
-
 import SwiftUI
 
 struct CocktailsListView: View {
     @StateObject private var viewModel = CocktailsViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(viewModel.cocktails) { cocktail in
                     NavigationLink(

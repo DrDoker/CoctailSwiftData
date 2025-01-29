@@ -19,15 +19,6 @@ final class CreateCocktailViewModel: ObservableObject {
     
     private let dataManager = DataManager.shared
     
-    let cocktailImageNames = [
-        "20th_century",
-        "amaretto_sour",
-        "americano",
-        "aperol_spritz",
-        "appletini",
-        "aviation"
-    ]
-    
     var isCreateDisabled: Bool {
         name.isEmpty || instructions.isEmpty || selectedIngredients.isEmpty || selectedImageName == nil
     }

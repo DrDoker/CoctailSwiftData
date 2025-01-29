@@ -39,7 +39,6 @@ struct SelectedImageView: View {
     }
 }
 
-
 #Preview {
     SelectedImageView(selectedImageName: "amaretto", onImageTap: {})
 }

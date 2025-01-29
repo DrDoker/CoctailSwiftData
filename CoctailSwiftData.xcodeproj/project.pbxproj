@@ -27,6 +27,7 @@
 		C528F9412D4AAF11007C4A51 /* ImageSelectionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528F9402D4AAF11007C4A51 /* ImageSelectionSheet.swift */; };
 		C528F9442D4AB946007C4A51 /* SelectedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528F9432D4AB946007C4A51 /* SelectedImageView.swift */; };
 		C528F9462D4AD1AF007C4A51 /* IngredientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528F9452D4AD1AF007C4A51 /* IngredientDetailViewModel.swift */; };
+		C528F9482D4AE351007C4A51 /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C528F9472D4AE351007C4A51 /* ImageConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		C528F9402D4AAF11007C4A51 /* ImageSelectionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionSheet.swift; sourceTree = "<group>"; };
 		C528F9432D4AB946007C4A51 /* SelectedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedImageView.swift; sourceTree = "<group>"; };
 		C528F9452D4AD1AF007C4A51 /* IngredientDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDetailViewModel.swift; sourceTree = "<group>"; };
+		C528F9472D4AE351007C4A51 /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				C528F9152D4A7AAA007C4A51 /* DataManager.swift */,
+				C528F9472D4AE351007C4A51 /* ImageConstants.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				C528F9232D4A90CD007C4A51 /* CocktailsViewModel.swift in Sources */,
 				C528F9272D4A9156007C4A51 /* CreateIngredientViewModel.swift in Sources */,
 				C528F9252D4A9102007C4A51 /* IngredientsViewModel.swift in Sources */,
+				C528F9482D4AE351007C4A51 /* ImageConstants.swift in Sources */,
 				C528F9292D4A916D007C4A51 /* CreateCocktailViewModel.swift in Sources */,
 				C528F91E2D4A8704007C4A51 /* Ingredient.swift in Sources */,
 				C528F91C2D4A86DF007C4A51 /* Cocktail.swift in Sources */,

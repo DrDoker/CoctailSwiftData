@@ -17,15 +17,6 @@ class IngredientDetailViewModel: ObservableObject {
     
     private let dataManager = DataManager.shared
     
-    let ingredientImageNames = [
-        "amaretto",
-        "amaro_nonino", 
-        "apple_schnapps",
-        "benedictine",
-        "cherry_liqueur",
-        "chocolate_liqueur"
-    ]
-    
     init(ingredient: Ingredient) {
         self.ingredient = ingredient
     }

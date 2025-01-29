@@ -38,7 +38,7 @@ struct CreateIngredientView: View {
             }
             .sheet(isPresented: $viewModel.isImageSheetPresented) {
                 ImageSelectionSheet(
-                    imageNames: viewModel.ingredientImageNames,
+                    imageNames: ImageConstants.ingredientImageNames,
                     selectedImageName: $viewModel.selectedImageName,
                     isPresented: $viewModel.isImageSheetPresented
                 )
