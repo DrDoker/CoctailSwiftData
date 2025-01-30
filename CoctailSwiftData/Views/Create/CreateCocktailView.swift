@@ -64,7 +64,7 @@ struct CreateCocktailView: View {
             }
             .sheet(isPresented: $viewModel.isImageSheetPresented) {
                 ImageSelectionSheet(
-                    imageNames: ImageConstants.cocktailImageNames,
+                    imageNames: ImageConstants.allCocktailImageNames,
                     selectedImageName: $viewModel.selectedImageName,
                     isPresented: $viewModel.isImageSheetPresented
                 )

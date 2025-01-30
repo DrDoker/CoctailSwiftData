@@ -27,11 +27,15 @@ final class DataManager {
         
         do {
             modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            self.modelContext = modelContainer.mainContext
+            
+            // Setup initial data if needed
+            Task {
+                try await setupInitialDataIfNeeded()
+            }
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
-        
-        self.modelContext = modelContainer.mainContext
     }
     
     // MARK: - Common methods for all Models
@@ -71,6 +75,20 @@ final class DataManager {
             try modelContext.save()
         } catch {
             print("Failed to save context: \(error)")
+        }
+    }
+    
+    // MARK: - Initial data setup
+    private func setupInitialDataIfNeeded() async throws {
+        let existingCocktails = try fetchAll(ofType: Cocktail.self)
+        
+        if existingCocktails.isEmpty {
+            for cocktail in CocktailsProvider.recipes {
+                modelContext.insert(cocktail)
+            }
+            
+            saveContext()
+            print("Initial cocktails were successfully added")
         }
     }
 }

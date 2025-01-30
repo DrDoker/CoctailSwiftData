@@ -32,3 +32,14 @@ final class Cocktail {
         self.ingredients = ingredients
     }
 }
+
+// Extension to support Hashable for Cocktail
+extension Cocktail: Hashable {
+    static func == (lhs: Cocktail, rhs: Cocktail) -> Bool {
+        lhs.name == rhs.name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}

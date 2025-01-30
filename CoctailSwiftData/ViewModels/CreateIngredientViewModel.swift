@@ -22,7 +22,12 @@ final class CreateIngredientViewModel: ObservableObject {
     }
     
     func saveIngredient() {
-        let ingredient = Ingredient(name: name, shortDescription: shortDescription, imageName: selectedImageName)
+        let ingredient = Ingredient(
+            name: name,
+            shortDescription: shortDescription,
+            imageName: selectedImageName,
+            isUserCreated: true
+        )
         dataManager.save(ingredient)
         clearFields()
     }

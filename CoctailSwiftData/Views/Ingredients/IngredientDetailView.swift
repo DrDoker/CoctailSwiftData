@@ -68,16 +68,18 @@ struct IngredientDetailView: View {
         }
         .navigationTitle(viewModel.ingredient.name)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(viewModel.isEditing ? "Save" : "Edit") {
-                    viewModel.handleEditButtonTap()
+            if viewModel.ingredient.isUserCreated {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(viewModel.isEditing ? "Save" : "Edit") {
+                        viewModel.handleEditButtonTap()
+                    }
+                    .disabled(viewModel.isSaveDisabled)
                 }
-                .disabled(viewModel.isSaveDisabled)
             }
         }
         .sheet(isPresented: $viewModel.isImageSheetPresented) {
             ImageSelectionSheet(
-                imageNames: ImageConstants.ingredientImageNames,
+                imageNames: ImageConstants.allIngredientImageNames,
                 selectedImageName: $viewModel.ingredient.imageName,
                 isPresented: $viewModel.isImageSheetPresented
             )

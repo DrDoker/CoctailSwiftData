@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct CoctailSwiftDataApp: App {
+    init() {
+        _ = DataManager.shared
+    }
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()

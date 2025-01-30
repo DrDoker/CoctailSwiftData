@@ -5,23 +5,31 @@
 //  Created by Serhii on 29.01.2025.
 //
 
+import Foundation
 
+@MainActor
 struct ImageConstants {
-    static let cocktailImageNames = [
-        "20th_century",
-        "amaretto_sour",
-        "americano",
-        "aperol_spritz",
-        "appletini",
-        "aviation"
-    ]
+    static var allIngredientImageNames: [String] {
+        do {
+            let allIngredients = try DataManager.shared.fetchAll(ofType: Ingredient.self)
+            let images = allIngredients.compactMap { $0.imageName }
+            let uniqueImages = Set(images)
+            return Array(uniqueImages)
+        } catch {
+            print("Error fetching ingredient images: \(error)")
+            return []
+        }
+    }
     
-    static let ingredientImageNames = [
-        "amaretto",
-        "amaro_nonino",
-        "apple_schnapps",
-        "benedictine",
-        "cherry_liqueur",
-        "chocolate_liqueur"
-    ]
+    static var allCocktailImageNames: [String] {
+        do {
+            let allCocktails = try DataManager.shared.fetchAll(ofType: Cocktail.self)
+            let images = allCocktails.compactMap { $0.imageName }
+            let uniqueImages = Set(images)
+            return Array(uniqueImages)
+        } catch {
+            print("Error fetching cocktail images: \(error)")
+            return []
+        }
+    }
 }

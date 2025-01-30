@@ -14,6 +14,7 @@ final class Ingredient {
     var name: String
     var shortDescription: String
     var imageName: String?
+    var isUserCreated: Bool
     
     @Relationship var cocktails: [Cocktail] = []
     
@@ -21,11 +22,24 @@ final class Ingredient {
         id: UUID = UUID(),
         name: String,
         shortDescription: String,
-        imageName: String? = nil
+        imageName: String? = nil,
+        isUserCreated: Bool = false
     ) {
         self.id = id
         self.name = name
         self.shortDescription = shortDescription
         self.imageName = imageName
+        self.isUserCreated = isUserCreated
+    }
+}
+
+// Extension to support Hashable for Ingredient
+extension Ingredient: Hashable {
+    static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
+        lhs.name == rhs.name
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
     }
 }
