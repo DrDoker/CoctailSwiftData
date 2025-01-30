@@ -25,6 +25,14 @@ struct CocktailsListView: View {
                                     .frame(width: 50, height: 50)
                             }
                             Text(cocktail.name)
+                            
+                            Spacer()
+                            
+                            if cocktail.isUserCreated {
+                                Image(systemName: "person.badge.plus")
+                                    .foregroundColor(.yellow)
+                                    .padding(.trailing, 5)
+                            }
                         }
                     }
                 }

@@ -9,7 +9,7 @@
 import Foundation
 
 struct CocktailsProvider {
-    static let recipes: Set<Cocktail> = Set([
+    static let recipes: [Cocktail] = [
         Cocktail(
             name: "Americano",
             imageName: "americano",
@@ -132,5 +132,5 @@ struct CocktailsProvider {
                 IngredientsProvider.ingredient(.eggWhite)
             ]
         )
-    ])
+    ]
 }

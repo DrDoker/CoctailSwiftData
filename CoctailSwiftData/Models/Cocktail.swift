@@ -14,6 +14,7 @@ final class Cocktail {
     var name: String
     var imageName: String?
     var instructions: String
+    var isUserCreated: Bool
     
     @Relationship(inverse: \Ingredient.cocktails)
     var ingredients: [Ingredient] = []
@@ -23,13 +24,15 @@ final class Cocktail {
         name: String,
         imageName: String? = nil,
         instructions: String,
-        ingredients: [Ingredient] = []
+        ingredients: [Ingredient] = [],
+        isUserCreated: Bool = false
     ) {
         self.id = id
         self.name = name
         self.imageName = imageName
         self.instructions = instructions
         self.ingredients = ingredients
+        self.isUserCreated = isUserCreated
     }
 }
 

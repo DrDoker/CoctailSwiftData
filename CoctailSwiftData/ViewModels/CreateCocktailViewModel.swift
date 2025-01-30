@@ -36,7 +36,8 @@ final class CreateCocktailViewModel: ObservableObject {
             name: name,
             imageName: selectedImageName,
             instructions: instructions,
-            ingredients: Array(selectedIngredients)
+            ingredients: Array(selectedIngredients),
+            isUserCreated: true
         )
         dataManager.save(cocktail)
         clearFields()

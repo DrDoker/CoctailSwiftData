@@ -30,6 +30,14 @@ struct IngredientsListView: View {
                                     .font(.caption)
                                     .foregroundColor(.gray)
                             }
+                            
+                            Spacer()
+                            
+                            if ingredient.isUserCreated {
+                                Image(systemName: "person.badge.plus")
+                                    .foregroundColor(.yellow)
+                                    .padding(.trailing, 5)
+                            }
                         }
                     }
                 }
