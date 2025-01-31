@@ -9,18 +9,9 @@ import Foundation
 
 @MainActor
 final class IngredientsViewModel: ObservableObject {
-    @Published var ingredients: [Ingredient] = []
-    
-    func fetchIngredients() {
-        do {
-            ingredients = try DataManager.shared.fetchAll(ofType: Ingredient.self)
-        } catch {
-            print("Error fetching ingredients: \(error)")
-        }
-    }
+    let dataManager = DataManager.shared
     
     func deleteIngredient(_ ingredient: Ingredient) {
-        DataManager.shared.delete(ingredient)
-        fetchIngredients()
+        dataManager.delete(ingredient)
     }
 }

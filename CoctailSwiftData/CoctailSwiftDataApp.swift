@@ -10,10 +10,12 @@ import SwiftData
 
 @main
 struct CoctailSwiftDataApp: App {
+    let dataManager = DataManager.shared
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
-                .modelContainer(DataManager.shared.modelContainer)
+                .modelContainer(dataManager.modelContainer)
                 .preferredColorScheme(.dark)
         }
     }

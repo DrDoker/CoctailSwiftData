@@ -15,8 +15,14 @@ class IngredientDetailViewModel: ObservableObject {
     @Published var editedShortDescription: String = ""
     @Published var isImageSheetPresented: Bool = false
     
+    let dataManager = DataManager.shared
+    
     init(ingredient: Ingredient) {
         self.ingredient = ingredient
+    }
+    
+    var isSaveDisabled: Bool {
+        isEditing && (editedName.isEmpty || editedShortDescription.isEmpty)
     }
     
     func startEditing() {
@@ -28,12 +34,8 @@ class IngredientDetailViewModel: ObservableObject {
     func saveChanges() {
         ingredient.name = editedName
         ingredient.shortDescription = editedShortDescription
-        DataManager.shared.update()
+        dataManager.update()
         isEditing = false
-    }
-    
-    var isSaveDisabled: Bool {
-        isEditing && (editedName.isEmpty || editedShortDescription.isEmpty)
     }
     
     func handleEditButtonTap() {

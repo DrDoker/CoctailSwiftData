@@ -131,8 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				C528F9222D4A90CD007C4A51 /* CocktailsViewModel.swift */,
-				C528F9452D4AD1AF007C4A51 /* IngredientDetailViewModel.swift */,
 				C528F9242D4A9102007C4A51 /* IngredientsViewModel.swift */,
+				C528F9452D4AD1AF007C4A51 /* IngredientDetailViewModel.swift */,
 				C528F9262D4A9156007C4A51 /* CreateIngredientViewModel.swift */,
 				C528F9282D4A916D007C4A51 /* CreateCocktailViewModel.swift */,
 			);

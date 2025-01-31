@@ -54,21 +54,21 @@ struct CreateCocktailView: View {
                 }
             }
             .navigationTitle("New Cocktail")
-            .onAppear {
-                viewModel.fetchAvailableIngredients()
-            }
-            .alert("Success", isPresented: $viewModel.showingAlert) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text("Cocktail created successfully")
-            }
-            .sheet(isPresented: $viewModel.isImageSheetPresented) {
-                ImageSelectionSheet(
-                    imageNames: ImageConstants.allCocktailImageNames,
-                    selectedImageName: $viewModel.selectedImageName,
-                    isPresented: $viewModel.isImageSheetPresented
-                )
-            }
+        }
+        .onAppear {
+            viewModel.fetchAvailableIngredients()
+        }
+        .alert("Success", isPresented: $viewModel.showingAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Cocktail created successfully")
+        }
+        .sheet(isPresented: $viewModel.isImageSheetPresented) {
+            ImageSelectionSheet(
+                imageNames: ImageConstants.allCocktailImageNames,
+                selectedImageName: $viewModel.selectedImageName,
+                isPresented: $viewModel.isImageSheetPresented
+            )
         }
     }
 }

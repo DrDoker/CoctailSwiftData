@@ -9,9 +9,9 @@ import Foundation
 
 @MainActor
 final class CocktailsViewModel: ObservableObject {
-    @Published var cocktails: [Cocktail] = []
+    let dataManager = DataManager.shared
     
     func deleteCocktail(_ cocktail: Cocktail) {
-        DataManager.shared.delete(cocktail)
+        dataManager.delete(cocktail)
     }
 }

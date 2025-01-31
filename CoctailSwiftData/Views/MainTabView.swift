@@ -36,5 +36,5 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
-        .modelContainer(DataManager.preview)
+        .modelContainer(DataManager.shared.modelContainer)
 }

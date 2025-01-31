@@ -14,7 +14,7 @@ final class DataManager {
     static let shared = DataManager()
     let modelContainer: ModelContainer
     private let modelContext: ModelContext
-
+    
     // MARK: - Initialization
     private init() {
         do {
@@ -24,7 +24,7 @@ final class DataManager {
             modelContainer = try ModelContainer(for: schema, configurations: [configuration])
             modelContext = modelContainer.mainContext
             
-            Task { try await setupInitialDataIfNeeded() }
+            Task { await setupInitialDataIfNeeded() }
         } catch {
             fatalError("ModelContainer initialization failed: \(error)")
         }
@@ -33,81 +33,54 @@ final class DataManager {
     // MARK: - CRUD Operations
     func save<T: PersistentModel>(_ model: T) {
         modelContext.insert(model)
-        tryToSave()
+        saveContext()
     }
     
     func delete<T: PersistentModel>(_ model: T) {
         modelContext.delete(model)
-        tryToSave()
+        saveContext()
     }
     
     func update() {
-        tryToSave()
+        saveContext()
     }
     
     // MARK: - Fetch Operations
-    func fetchAll<T: PersistentModel>(ofType type: T.Type) throws -> [T] {
-        try modelContext.fetch(FetchDescriptor<T>())
+    func fetchAll<T: PersistentModel>(ofType type: T.Type) -> [T] {
+        do {
+            let fetchDescriptor = FetchDescriptor<T>()
+            return try modelContext.fetch(fetchDescriptor)
+        } catch {
+            print("Failed to fetch \(type): \(error)")
+            return []
+        }
     }
     
-    func deleteAll<T: PersistentModel>(of type: T.Type) throws {
-        let items = try fetchAll(ofType: type) as [T]
+    func deleteAll<T: PersistentModel>(of type: T.Type) {
+        let items = fetchAll(ofType: type) as [T]
         items.forEach { modelContext.delete($0) }
-        tryToSave()
+        saveContext()
     }
-}
-
-// MARK: - Private Extensions
-private extension DataManager {
-    func tryToSave() {
+    
+    // MARK: - Private Methods
+    private func saveContext() {
         do {
             try modelContext.save()
         } catch {
             print("Failed to save context: \(error)")
         }
     }
-    
-    func setupInitialDataIfNeeded() async throws {
-        let existingCocktails = try fetchAll(ofType: Cocktail.self)
+}
+
+// MARK: - Initial Data Setup
+private extension DataManager {
+    func setupInitialDataIfNeeded() async {
+        let existingCocktails = fetchAll(ofType: Cocktail.self)
         
         guard existingCocktails.isEmpty else { return }
         
         CocktailsProvider.recipes.forEach { modelContext.insert($0) }
-        tryToSave()
+        saveContext()
         print("Initial cocktails added successfully")
-    }
-}
-
-extension DataManager {
-    static var preview: ModelContainer {
-        do {
-            let schema = Schema([Ingredient.self, Cocktail.self])
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: schema, configurations: [config])
-            
-            // Добавляем тестовые данные
-            let context = container.mainContext
-            
-            let ingredient = Ingredient(
-                name: "Test Ingredient",
-                shortDescription: "Test Description",
-                imageName: "amaretto"
-            )
-            context.insert(ingredient)
-            
-            let cocktail = Cocktail(
-                name: "Test Cocktail",
-                imageName: "americano",
-                instructions: "Test Instructions",
-                ingredients: [ingredient]
-            )
-            context.insert(cocktail)
-            
-            try context.save()
-            
-            return container
-        } catch {
-            fatalError("Failed to create preview container: \(error)")
-        }
     }
 }

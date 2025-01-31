@@ -47,5 +47,5 @@ struct CocktailsListView: View {
 
 #Preview {
     CocktailsListView()
-        .modelContainer(DataManager.preview)
+        .modelContainer(DataManager.shared.modelContainer)
 }

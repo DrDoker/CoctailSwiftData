@@ -31,18 +31,18 @@ struct CreateIngredientView: View {
                 }
             }
             .navigationTitle("New Ingredient")
-            .alert("Success", isPresented: $viewModel.showingAlert) {
-                Button("OK", role: .cancel) { }
-            } message: {
-                Text("Ingredient created successfully")
-            }
-            .sheet(isPresented: $viewModel.isImageSheetPresented) {
-                ImageSelectionSheet(
-                    imageNames: ImageConstants.allIngredientImageNames,
-                    selectedImageName: $viewModel.selectedImageName,
-                    isPresented: $viewModel.isImageSheetPresented
-                )
-            }
+        }
+        .alert("Success", isPresented: $viewModel.showingAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Ingredient created successfully")
+        }
+        .sheet(isPresented: $viewModel.isImageSheetPresented) {
+            ImageSelectionSheet(
+                imageNames: ImageConstants.allIngredientImageNames,
+                selectedImageName: $viewModel.selectedImageName,
+                isPresented: $viewModel.isImageSheetPresented
+            )
         }
     }
 }

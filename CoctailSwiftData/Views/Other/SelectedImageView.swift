@@ -40,5 +40,6 @@ struct SelectedImageView: View {
 }
 
 #Preview {
+    SelectedImageView(selectedImageName: nil, onImageTap: {})
     SelectedImageView(selectedImageName: "amaretto", onImageTap: {})
 }

@@ -25,8 +25,6 @@ struct ImageSelectionSheet: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 150)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                            .shadow(radius: 8)
                             .padding(10)
                             .onTapGesture {
                                 selectedImageName = imageName
@@ -46,7 +44,7 @@ struct ImageSelectionSheet: View {
 
 #Preview {
     ImageSelectionSheet(
-        imageNames: ["amaretto", "americano"],
+        imageNames: ["aperol_spritz", "americano"],
         selectedImageName: .constant(""),
         isPresented: .constant(true)
     )
