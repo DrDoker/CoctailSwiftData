@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IngredientDetailView: View {
     @StateObject private var viewModel: IngredientDetailViewModel
+    @Environment(\.presentationMode) private var presentationMode
     
     init(ingredient: Ingredient) {
         _viewModel = StateObject(wrappedValue: IngredientDetailViewModel(ingredient: ingredient))
@@ -70,12 +71,23 @@ struct IngredientDetailView: View {
         .toolbar {
             if viewModel.ingredient.isUserCreated {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(role: .destructive) {
+                        viewModel.deleteIngredient()
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(viewModel.isEditing ? "Save" : "Edit") {
                         viewModel.handleEditButtonTap()
                     }
                     .disabled(viewModel.isSaveDisabled)
                 }
             }
+
         }
         .sheet(isPresented: $viewModel.isImageSheetPresented) {
             ImageSelectionSheet(

@@ -45,4 +45,8 @@ class IngredientDetailViewModel: ObservableObject {
             startEditing()
         }
     }
+    
+    func deleteIngredient() {
+        dataManager.delete(ingredient)
+    }
 }
