@@ -50,7 +50,7 @@ struct IngredientsListView: View {
             .listStyle(PlainListStyle())
             .navigationTitle("Ingredients")
             .onAppear {
-                viewModel.fetchIngredients()
+//                viewModel.fetchIngredients()
             }
             .refreshable {
                 viewModel.fetchIngredients()
@@ -61,4 +61,5 @@ struct IngredientsListView: View {
 
 #Preview {
     IngredientsListView()
+        .modelContainer(DataManager.preview)
 }

@@ -15,8 +15,6 @@ final class CreateIngredientViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var isImageSheetPresented = false
     
-    private let dataManager = DataManager.shared
-    
     var isSaveDisabled: Bool {
         name.isEmpty || shortDescription.isEmpty || selectedImageName == nil
     }
@@ -28,7 +26,7 @@ final class CreateIngredientViewModel: ObservableObject {
             imageName: selectedImageName,
             isUserCreated: true
         )
-        dataManager.save(ingredient)
+        DataManager.shared.save(ingredient)
         clearFields()
     }
     

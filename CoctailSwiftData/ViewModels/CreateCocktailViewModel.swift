@@ -17,15 +17,13 @@ final class CreateCocktailViewModel: ObservableObject {
     @Published var showingAlert = false
     @Published var isImageSheetPresented = false
     
-    private let dataManager = DataManager.shared
-    
     var isCreateDisabled: Bool {
         name.isEmpty || instructions.isEmpty || selectedIngredients.isEmpty || selectedImageName == nil
     }
     
     func fetchAvailableIngredients() {
         do {
-            availableIngredients = try dataManager.fetchAll(ofType: Ingredient.self)
+            availableIngredients = try DataManager.shared.fetchAll(ofType: Ingredient.self)
         } catch {
             print("Error fetching ingredients: \(error)")
         }
@@ -39,7 +37,7 @@ final class CreateCocktailViewModel: ObservableObject {
             ingredients: Array(selectedIngredients),
             isUserCreated: true
         )
-        dataManager.save(cocktail)
+        DataManager.shared.save(cocktail)
         clearFields()
     }
     

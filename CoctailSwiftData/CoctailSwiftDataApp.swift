@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CoctailSwiftDataApp: App {
-    init() {
-        _ = DataManager.shared
-    }
-    
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .modelContainer(DataManager.shared.modelContainer)
                 .preferredColorScheme(.dark)
         }
     }

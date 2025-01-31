@@ -10,67 +10,56 @@ import Foundation
 
 @MainActor
 final class DataManager {
-    private let modelContainer: ModelContainer
-    private let modelContext: ModelContext
-    
+    // MARK: - Properties
     static let shared = DataManager()
-    
+    let modelContainer: ModelContainer
+    private let modelContext: ModelContext
+
+    // MARK: - Initialization
     private init() {
-        let schema = Schema([
-            Ingredient.self,
-            Cocktail.self
-        ])
-        let modelConfiguration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false
-        )
-        
         do {
-            modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            self.modelContext = modelContainer.mainContext
+            let schema = Schema([Ingredient.self, Cocktail.self])
+            let configuration = ModelConfiguration(schema: schema)
             
-            // Setup initial data if needed
-            Task {
-                try await setupInitialDataIfNeeded()
-            }
+            modelContainer = try ModelContainer(for: schema, configurations: [configuration])
+            modelContext = modelContainer.mainContext
+            
+            Task { try await setupInitialDataIfNeeded() }
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError("ModelContainer initialization failed: \(error)")
         }
     }
     
-    // MARK: - Common methods for all Models
-    /// Save a model
-    func save<T: PersistentModel>(_ object: T) {
-        modelContext.insert(object)
-        saveContext()
+    // MARK: - CRUD Operations
+    func save<T: PersistentModel>(_ model: T) {
+        modelContext.insert(model)
+        tryToSave()
     }
     
-    /// Update context
+    func delete<T: PersistentModel>(_ model: T) {
+        modelContext.delete(model)
+        tryToSave()
+    }
+    
     func update() {
-        saveContext()
+        tryToSave()
     }
     
-    /// Delete a model
-    func delete<T: PersistentModel>(_ object: T) {
-        modelContext.delete(object)
-        saveContext()
-    }
-    
-    /// Fetch all objects of type
+    // MARK: - Fetch Operations
     func fetchAll<T: PersistentModel>(ofType type: T.Type) throws -> [T] {
-        let fetchDescriptor = FetchDescriptor<T>()
-        return try modelContext.fetch(fetchDescriptor)
+        try modelContext.fetch(FetchDescriptor<T>())
     }
     
-    /// Delete all objects of type
-    func deleteAll<T: PersistentModel>(ofType type: T.Type) throws {
-        let objects = try fetchAll(ofType: type)
-        objects.forEach { modelContext.delete($0) }
-        saveContext()
+    func deleteAll<T: PersistentModel>(of type: T.Type) throws {
+        let items = try fetchAll(ofType: type) as [T]
+        items.forEach { modelContext.delete($0) }
+        tryToSave()
     }
-    
-    // MARK: - Private save method
-    private func saveContext() {
+}
+
+// MARK: - Private Extensions
+private extension DataManager {
+    func tryToSave() {
         do {
             try modelContext.save()
         } catch {
@@ -78,17 +67,47 @@ final class DataManager {
         }
     }
     
-    // MARK: - Initial data setup
-    private func setupInitialDataIfNeeded() async throws {
+    func setupInitialDataIfNeeded() async throws {
         let existingCocktails = try fetchAll(ofType: Cocktail.self)
         
-        if existingCocktails.isEmpty {
-            for cocktail in CocktailsProvider.recipes {
-                modelContext.insert(cocktail)
-            }
+        guard existingCocktails.isEmpty else { return }
+        
+        CocktailsProvider.recipes.forEach { modelContext.insert($0) }
+        tryToSave()
+        print("Initial cocktails added successfully")
+    }
+}
+
+extension DataManager {
+    static var preview: ModelContainer {
+        do {
+            let schema = Schema([Ingredient.self, Cocktail.self])
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            let container = try ModelContainer(for: schema, configurations: [config])
             
-            saveContext()
-            print("Initial cocktails were successfully added")
+            // Добавляем тестовые данные
+            let context = container.mainContext
+            
+            let ingredient = Ingredient(
+                name: "Test Ingredient",
+                shortDescription: "Test Description",
+                imageName: "amaretto"
+            )
+            context.insert(ingredient)
+            
+            let cocktail = Cocktail(
+                name: "Test Cocktail",
+                imageName: "americano",
+                instructions: "Test Instructions",
+                ingredients: [ingredient]
+            )
+            context.insert(cocktail)
+            
+            try context.save()
+            
+            return container
+        } catch {
+            fatalError("Failed to create preview container: \(error)")
         }
     }
 }

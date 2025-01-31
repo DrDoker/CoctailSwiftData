@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CocktailsListView: View {
     @StateObject private var viewModel = CocktailsViewModel()
+    @Query private var cocktails: [Cocktail]
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(viewModel.cocktails) { cocktail in
+                ForEach(cocktails) { cocktail in
                     NavigationLink(
                         destination: CocktailDetailView(cocktail: cocktail)
                     ) {
@@ -36,24 +38,14 @@ struct CocktailsListView: View {
                         }
                     }
                 }
-                .onDelete { indexSet in
-                    indexSet.forEach { index in
-                        viewModel.deleteCocktail(viewModel.cocktails[index])
-                    }
-                }
             }
             .listStyle(PlainListStyle())
             .navigationTitle("Cocktails")
-            .onAppear {
-                viewModel.fetchCocktails()
-            }
-            .refreshable {
-                viewModel.fetchCocktails()
-            }
         }
     }
 }
 
 #Preview {
     CocktailsListView()
+        .modelContainer(DataManager.preview)
 }

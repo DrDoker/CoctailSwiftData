@@ -46,7 +46,7 @@ struct ImageSelectionSheet: View {
 
 #Preview {
     ImageSelectionSheet(
-        imageNames: ImageConstants.allCocktailImageNames,
+        imageNames: ["amaretto", "americano"],
         selectedImageName: .constant(""),
         isPresented: .constant(true)
     )

@@ -15,8 +15,6 @@ class IngredientDetailViewModel: ObservableObject {
     @Published var editedShortDescription: String = ""
     @Published var isImageSheetPresented: Bool = false
     
-    private let dataManager = DataManager.shared
-    
     init(ingredient: Ingredient) {
         self.ingredient = ingredient
     }
@@ -30,7 +28,7 @@ class IngredientDetailViewModel: ObservableObject {
     func saveChanges() {
         ingredient.name = editedName
         ingredient.shortDescription = editedShortDescription
-        dataManager.update()
+        DataManager.shared.update()
         isEditing = false
     }
     
