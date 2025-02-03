@@ -49,8 +49,11 @@ struct CocktailDetailView: View {
     let cocktail = Cocktail(
         name: "Americano",
         imageName: "americano",
-        instructions: "Pour all ingredients directly into lowball glass filled with ice. Stir gently. Garnish with half orange slice."
+        instructions: "Pour all ingredients directly into lowball glass filled with ice. Stir gently. Garnish with half orange slice.",
+        isUserCreated: true
     )
     
-    CocktailDetailView(cocktail: cocktail)
+    NavigationStack {
+        CocktailDetailView(cocktail: cocktail)
+    }
 }

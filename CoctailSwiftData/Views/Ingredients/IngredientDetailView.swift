@@ -103,7 +103,11 @@ struct IngredientDetailView: View {
     let ingredient = Ingredient(
         name: "Amaretto",
         shortDescription: "Amaretto is a sweet Italian liqueur that is almond-flavored.",
-        imageName: "amaretto"
+        imageName: "amaretto",
+        isUserCreated: true
     )
-    IngredientDetailView(ingredient: ingredient)
+    
+    NavigationStack {
+        IngredientDetailView(ingredient: ingredient)
+    }
 }

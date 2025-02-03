@@ -15,7 +15,7 @@ struct CocktailsListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(cocktails) { cocktail in
+                ForEach(viewModel.sortCocktails(cocktails)) { cocktail in
                     NavigationLink(
                         destination: CocktailDetailView(cocktail: cocktail)
                     ) {
@@ -41,6 +41,19 @@ struct CocktailsListView: View {
             }
             .listStyle(PlainListStyle())
             .navigationTitle("Cocktails")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Picker("Sort by:", selection: $viewModel.sortOption) {
+                            ForEach(CocktailSortOption.allCases) { option in
+                                Text(option.rawValue).tag(option)
+                            }
+                        }
+                    } label: {
+                        Label("Sort", systemImage: "arrow.up.arrow.down")
+                    }
+                }
+            }
         }
     }
 }
